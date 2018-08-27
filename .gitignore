@@ -1,3 +1,14 @@
+#############
+# ANTLR generated source
+#
+/src/main/java/org/stevecooper/bake/compiler/
+
+
+
+#############
+# IntelliJ
+#
+
 # Compiled class file
 *.class
 

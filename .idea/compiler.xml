@@ -2,8 +2,9 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="bake_main" target="1.10" />
-      <module name="bake_test" target="1.10" />
+      <module name="bake_generated" target="1.8" />
+      <module name="bake_main" target="1.8" />
+      <module name="bake_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
