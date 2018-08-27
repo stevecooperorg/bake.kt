@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/bake.kt.iml" filepath="$PROJECT_DIR$/bake.kt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bake.iml" filepath="$PROJECT_DIR$/.idea/modules/bake.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bake_main.iml" filepath="$PROJECT_DIR$/.idea/modules/bake_main.iml" group="bake" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bake_test.iml" filepath="$PROJECT_DIR$/.idea/modules/bake_test.iml" group="bake" />
     </modules>
   </component>
 </project>
