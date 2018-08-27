@@ -7,11 +7,20 @@ import org.stevecooper.bake.compiler.HelloParser
 
 class Compiler {
 
-    fun compileString(code: String) {
+    fun toTokens(code: String): CommonTokenStream {
         val stream = ANTLRInputStream(code)
         val lexer = HelloLexer(stream)
         val tokens = CommonTokenStream(lexer)
+        return tokens;
+    }
+
+    fun compileString(code: String) {
+        val tokens = toTokens(code)
         val parser = HelloParser(tokens)
         val result = parser.r()
+    }
+
+    fun readLarder(code: String) {
+        throw NotImplementedError()
     }
 }
