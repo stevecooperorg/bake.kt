@@ -28,18 +28,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-//sourceSets {
-//    main {
-//        java {
-//            srcDirs 'generated-src/antlr'
-//            srcDirs 'src/main/java'
-//        }
-//    }
-//}
-
-//sourceSets.main.java.srcDirs = [
-//        'src/main/java']
-
 generateGrammarSource {
     maxHeapSize = "64m"
     arguments += ['-package', 'org.stevecooper.bake.compiler']
