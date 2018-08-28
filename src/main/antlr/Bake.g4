@@ -4,7 +4,7 @@ grammar Bake;
 larder   : ingredientType+;
 
 // eg >> (SRFl - self raising flour, g)
-ingredientType: OP INGREDIENT_CODE DASH .* COMMA .* CL;
+ingredientType: OP code=INGREDIENT_CODE DASH name=STRING COMMA units=STRING CL;
 
 COMMA: ',';
 
