@@ -1,9 +1,14 @@
 // define a grammar called Hello
 grammar Bake;
+
 larder   : ingredientType+;
 
 // eg >> (SRFl - self raising flour, g)
-ingredientType: OP INGREDIENT_CODE '-' .* ',' .* CL;
+ingredientType: OP INGREDIENT_CODE DASH .* COMMA .* CL;
+
+COMMA: ',';
+
+DASH: '-';
 
 OP : '(';
 

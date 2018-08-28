@@ -8,8 +8,8 @@ import org.junit.Test as test
 class LexerTests {
 
     @test fun `can lex larder tokens`() {
-        val actual = tokens(lexerForCode("( SrFl \"Bake\" )"))
-        val expected = listOf("OP", "INGREDIENT_CODE", "STRING", "CL")
+        val actual = tokens(lexerForCode("( SrFl \"Bake\" , \"Str\" - -)"))
+        val expected = listOf("OP", "INGREDIENT_CODE", "STRING", "COMMA", "STRING", "DASH", "DASH", "CL")
         assertEquals(expected, actual)
     }
 
