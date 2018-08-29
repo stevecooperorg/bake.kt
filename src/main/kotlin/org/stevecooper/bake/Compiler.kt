@@ -1,50 +1,50 @@
 package org.stevecooper.bake
 
-import org.antlr.v4.runtime.ANTLRErrorListener
 import org.antlr.v4.runtime.ANTLRInputStream
 import org.antlr.v4.runtime.CommonTokenStream
-import org.antlr.v4.runtime.tree.ParseTree
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import org.stevecooper.bake.compiler.BakeLexer
 import org.stevecooper.bake.compiler.BakeParser
+import javax.naming.PartialResultException
 
 class Compiler {
 
-    fun toTokens(code: String): CommonTokenStream {
+    private var aggregateResult = ParseResult(emptyList(), emptyList(), emptyList())
+
+    fun readCookbook(code: String, file: String) : ParseResult {
+        // set up error listener, input stream, etc
+        val errorListener = ListErrorListener(file)
         val stream = ANTLRInputStream(code)
+
+        // the lexer needs to be listening for token recognition exceptions
         val lexer = BakeLexer(stream)
+        lexer.removeErrorListeners()
+        lexer.addErrorListener(errorListener)
         val tokens = CommonTokenStream(lexer)
-        return tokens
-    }
 
-    fun extract(parser: BakeParser, result: ParseTree, errorListener: ListErrorListener) : ParseResult {
+        // the parser also listens for syntax errors
+        val parser = BakeParser(tokens)
+        parser.addErrorListener(errorListener)
+        val result = parser.cookbook()
+
         if (result == null) {
-            Exception("could not parse")
-        }
-
-        val syntaxErrorCount = parser.numberOfSyntaxErrors;
-        if (syntaxErrorCount > 0) {
-            val errors = errorListener.toList()
-            return ParseResult(errors, emptyList())
+            throw Exception("could not parse")
         }
 
         val walker = ParseTreeWalker() // create standard walker
-        val extractor = BakeListener(parser)
+        val extractor = BakeListener()
         walker.walk(extractor, result) // initiate walk of tree with listener
 
-        return extractor.result()
+        val partialResult = extractor.result()
+        this.aggregateResult = ParseResult(
+                this.aggregateResult.syntaxErrors.plus(errorListener.toList()),
+                this.aggregateResult.ingredientTypes,
+                this.aggregateResult.recipes)
+        this.aggregateResult = this.aggregateResult.merge(partialResult)
+        return partialResult
     }
 
-    fun readLarder(code: String, file: String): ParseResult {
-        return parse(code, file) { it.larder() }
-    }
-
-    private fun parse(code: String, file: String, parse: (BakeParser) -> ParseTree): ParseResult {
-        val tokens = toTokens(code)
-        val parser = BakeParser(tokens)
-        val errorListener = ListErrorListener(file)
-        parser.addErrorListener(errorListener)
-        val result = parse(parser)
-        return extract(parser, result, errorListener)
+    fun result(): ParseResult {
+        return this.aggregateResult
     }
 }

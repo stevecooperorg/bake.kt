@@ -3,10 +3,10 @@ package org.stevecooper.bake
 import org.stevecooper.bake.compiler.BakeBaseListener
 import org.stevecooper.bake.compiler.BakeParser
 
-class BakeListener(private val parser: BakeParser): BakeBaseListener() {
+class BakeListener : BakeBaseListener() {
 
     fun result(): ParseResult {
-        return ParseResult(emptyList(), ingredientTypes.toList())
+        return ParseResult(emptyList(), ingredientTypes.toList(), emptyList())
     }
 
     private fun extractString(text: String): String {
