@@ -6,7 +6,7 @@ import org.stevecooper.bake.compiler.BakeParser
 class BakeListener(private val parser: BakeParser): BakeBaseListener() {
 
     fun result(): ParseResult {
-        return ParseResult(ingredientTypes.toList())
+        return ParseResult(emptyList(), ingredientTypes.toList())
     }
 
     private fun extractString(text: String): String {

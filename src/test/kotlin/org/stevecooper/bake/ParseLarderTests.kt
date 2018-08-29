@@ -10,7 +10,7 @@ class ParseLarderTests {
 
     @test fun `can parse a larder item`() {
         val compiler = Compiler();
-        val result = compiler.readLarder("(BaPo - \"baking powder\", \"tsp\")")
+        val result = compiler.readLarder("(BaPo - \"baking powder\", \"tsp\")", "larder.test.file")
         assertEquals(result.ingredientTypes.size , 1)
 
         val ingredient = result.ingredientTypes[0]
