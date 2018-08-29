@@ -8,11 +8,11 @@ larder   : ingredientType+;
 // eg >> (SRFl - self raising flour, g)
 ingredientType: INGREDIENT code=INGREDIENT_CODE name=STRING units=STRING;
 
-recipe: RECIPE ID pot+;
+recipe: RECIPE name=ID pot+;
 
-pot: POT_ID action;
+pot: potId=POT_ID action*;
 
-action: INGREDIENT_AMOUNT* ID;
+action: ingredients=INGREDIENT_AMOUNT* act=ID;
 
 INGREDIENT: 'INGREDIENT';
 

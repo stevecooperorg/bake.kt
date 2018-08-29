@@ -11,7 +11,7 @@ class Compiler {
 
     private var aggregateResult = ParseResult(emptyList(), emptyList(), emptyList())
 
-    fun readCookbook(code: String, file: String) : ParseResult {
+    fun readCookbook(code: String, file: String) {
         // set up error listener, input stream, etc
         val errorListener = ListErrorListener(file)
         val stream = ANTLRInputStream(code)
@@ -41,7 +41,7 @@ class Compiler {
                 this.aggregateResult.ingredientTypes,
                 this.aggregateResult.recipes)
         this.aggregateResult = this.aggregateResult.merge(partialResult)
-        return partialResult
+
     }
 
     fun result(): ParseResult {

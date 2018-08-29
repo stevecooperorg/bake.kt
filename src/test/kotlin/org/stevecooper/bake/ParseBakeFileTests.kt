@@ -37,7 +37,9 @@ class ParseBakeFileTests {
 
     @test fun `fail on gibberish`() {
         val gibberish = "!!!"
-        val result = Compiler().readCookbook(gibberish, "gibberish test")
+        val compiler = Compiler()
+        compiler.readCookbook(gibberish, "gibberish test")
+        val result =compiler.result()
         assert(result.fail())
     }
 }
